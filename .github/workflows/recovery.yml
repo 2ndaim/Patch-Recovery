@@ -27,7 +27,8 @@ jobs:
       run: |
         ls
         pwd
-        wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=${{github.event.inputs.RECOVERY_URL }}' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=${{github.event.inputs.RECOVERY_URL }}" -O recovery.img && rm -rf /tmp/cookies.txt
+        pip install gdown
+        gdown --id ${{github.event.inputs.RECOVERY_URL }} --output recovery.img
 
     - name: Patch Process-1
       run: |
